@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Professional Portfolio - Soft Skills Educator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet"
+    />
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #10b981;
+            --dark: #1f2937;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: #e0e0e0;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .icon-3d {
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: transform 0.5s ease;
+        }
+
+        .icon-3d:hover {
+            transform: perspective(1000px) rotateY(20deg) translateZ(20px);
+        }
+
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #121212;
+            box-shadow: 0 4px 15px rgba(124, 58, 174, 0.3);
+        }
+
+        .card-3d:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 8px 30px rgba(124, 58, 174, 0.6);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .typing-effect::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: var(--accent);
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Mobile menu styles */
+        #mobile-menu {
+            display: none;
+        }
+
+        #mobile-menu.active {
+            display: block;
+        }
+
+        /* Scrollbar styling for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-90 shadow-lg z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-purple-400">Mr. Shivam</div>
+            <div class="hidden md:flex space-x-8 text-gray-300">
+                <a href="#home" class="hover:text-purple-400 transition-colors">Home</a>
+                <a href="#about" class="hover:text-purple-400 transition-colors">About</a>
+                <a href="#services" class="hover:text-purple-400 transition-colors">Services</a>
+                <a href="#memories" class="hover:text-purple-400 transition-colors">Memories</a>
+                <a href="#testimonials" class="hover:text-purple-400 transition-colors">Testimonials</a>
+                <a href="#contact" class="hover:text-purple-400 transition-colors">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" aria-label="Toggle menu" class="text-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 rounded">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="bg-black bg-opacity-95 text-gray-300 px-6 py-4 md:hidden">
+            <a href="#home" class="block py-2 hover:text-purple-400 transition-colors">Home</a>
+            <a href="#about" class="block py-2 hover:text-purple-400 transition-colors">About</a>
+            <a href="#services" class="block py-2 hover:text-purple-400 transition-colors">Services</a>
+            <a href="#testimonials" class="block py-2 hover:text-purple-400 transition-colors">Testimonials</a>
+            <a href="#contact" class="block py-2 hover:text-purple-400 transition-colors">Contact</a>
+        </div>
+    </nav>
+  <!-- WhatsApp Sticky Button -->
+  <a href="https://wa.me/918796528626" target="_blank" 
+     class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors z-50">
+     <i class="fab fa-whatsapp text-white text-3xl"></i>
+  </a>
+    <!-- Hero Section -->
+    <section
+        id="home"
+        class="min-h-screen pt-20 flex items-center gradient-bg text-white"
+        style="background: linear-gradient(135deg, #4c1d95 0%, #2563eb 100%)"
+    >
+        <div class="container mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+                        Empowering Tomorrow's <span class="typing-effect text-accent"></span>
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-200 max-w-lg">
+                        Transformative soft skills education for university students and professionals
+                    </p>
+                    <div class="flex space-x-4 flex-wrap">
+                        <button
+                            class="bg-purple-400 text-black px-8 py-3 rounded-full font-semibold hover:bg-purple-500 transition-colors mb-2"
+                        >
+                        
+                            Book Consultation
+                        </button>
+                        <button
+                            class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-700 transition-colors mb-2"
+                        >
+                        <a href="courses.html">View Courses</a>
+                            
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="floating">
+                        <img
+                            src="s1 (1).jpg"
+                            alt="Professional university educator in academic setting with confident posture and engaging teaching style"
+                            class="rounded-2xl shadow-2xl max-w-full"
+                        />
+                    </div>
+                    <div
+                        class="absolute -top-4 -right-4 w-24 h-24 bg-purple-400 rounded-full flex items-center justify-center shadow-xl icon-3d"
+                    >
+                        <i class="fas fa-graduation-cap text-4xl text-black"></i>
+                    </div>
+                    <div
+                        class="absolute -bottom-4 -left-4 w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-xl icon-3d"
+                    >
+                        <i class="fas fa-comments text-3xl text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-black bg-opacity-90">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-purple-400">About My Expertise</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Dedicated to developing the essential soft skills that drive professional success and personal growth
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center card-3d p-8 rounded-2xl">
+                    <div
+                        class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 icon-3d"
+                        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+                    >
+                        <i class="fas fa-users text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-purple-300">Leadership Development</h3>
+                    <p class="text-gray-400">
+                        Comprehensive programs to cultivate effective leadership qualities in aspiring professionals
+                    </p>
+                </div>
+
+                <div class="text-center card-3d p-8 rounded-2xl">
+                    <div
+                        class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 icon-3d"
+                        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+                    >
+                        <i class="fas fa-microphone text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-purple-300">Communication Mastery</h3>
+                    <p class="text-gray-400">
+                        Advanced techniques for persuasive speaking, active listening, and effective presentation
+                    </p>
+                </div>
+
+                <div class="text-center card-3d p-8 rounded-2xl">
+                    <div
+                        class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 icon-3d"
+                        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+                    >
+                        <i class="fas fa-brain text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-purple-300">Emotional Intelligence</h3>
+                    <p class="text-gray-400">
+                        Developing self-awareness and interpersonal skills for better workplace relationships
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-black bg-opacity-80">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-purple-400">Professional Services</h2>
+                <p class="text-xl text-gray-300">
+                    Comprehensive soft skills training programs tailored for academic and corporate environments
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl shadow-lg card-3d">
+                    <div
+                        class="w-16 h-16 rounded-lg flex items-center justify-center mb-6 icon-3d"
+                        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+                    >
+                        <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-purple-300">University Workshops</h3>
+                    <p class="text-gray-400 mb-4">
+                        Interactive sessions for students covering essential professional skills
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside">
+                        <li>Public Speaking</li>
+                        <li>Team Collaboration</li>
+                        <li>Critical Thinking</li>
+                    </ul>
+                </div>
+
+                <div class="p-8 rounded-2xl shadow-lg card-3d">
+                    <div
+                        class="w-16 h-16 rounded-lg flex items-center justify-center mb-6 icon-3d"
+                        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+                    >
+                        <i class="fas fa-briefcase text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-purple-300">Corporate Training</h3>
+                    <p class="text-gray-400 mb-4">Professional development programs for organizations</p>
+                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside">
+                        <li>Leadership Development</li>
+                        <li>Conflict Resolution</li>
+                        <li>Effective Communication</li>
+                    </ul>
+                </div>
+
+                <div class="p-8 rounded-2xl shadow-lg card-3d">
+                    <div
+                        class="w-16 h-16 rounded-lg flex items-center justify-center mb-6 icon-3d"
+                        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+                    >
+                        <i class="fas fa-user-graduate text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-purple-300">One-on-One Coaching</h3>
+                    <p class="text-gray-400 mb-4">Personalized guidance for individual growth</p>
+                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside">
+                        <li>Career Counseling</li>
+                        <li>Interview Preparation</li>
+                        <li>Personal Branding</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+
+    <!-- Media Section -->
+<section id="media" class="py-20 bg-black bg-opacity-80">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 text-purple-400">Photos & Videos</h2>
+      <p class="text-xl text-gray-300">
+        Explore my professional journey through dedicated photo & video galleries
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Photo Gallery -->
+      <div class="p-8 rounded-2xl shadow-lg card-3d hover:scale-105 transition-transform">
+        <div
+          class="w-16 h-16 rounded-lg flex items-center justify-center mb-6 icon-3d"
+          style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)"
+        >
+          <i class="fas fa-image text-2xl text-white"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-4 text-purple-300">Photo Gallery</h3>
+        <p class="text-gray-400 mb-4">
+          View moments captured from my workshops and events.
+        </p>
+        <a href="Photo.html" class="text-sm text-blue-400 hover:underline">View Photos</a>
+      </div>
+
+      <!-- Video Gallery -->
+      <div class="p-8 rounded-2xl shadow-lg card-3d hover:scale-105 transition-transform">
+        <div
+          class="w-16 h-16 rounded-lg flex items-center justify-center mb-6 icon-3d"
+          style="background: linear-gradient(135deg, #10b981 0%, #2563eb 100%)"
+        >
+          <i class="fas fa-video text-2xl text-white"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-4 text-purple-300">Video Gallery</h3>
+        <p class="text-gray-400 mb-4">
+          Watch highlights from my soft skills training programs.
+        </p>
+        <a href="Video.html" class="text-sm text-green-400 hover:underline">Watch Videos</a>
+      </div>
+
+      <!-- Event Highlights -->
+      <div class="p-8 rounded-2xl shadow-lg card-3d hover:scale-105 transition-transform">
+        <div
+          class="w-16 h-16 rounded-lg flex items-center justify-center mb-6 icon-3d"
+          style="background: linear-gradient(135deg, #9333ea 0%, #2563eb 100%)"
+        >
+          <i class="fas fa-photo-video text-2xl text-white"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-4 text-purple-300">Event Highlights</h3>
+        <p class="text-gray-400 mb-4">
+          Explore snapshots and clips from professional events.
+        </p>
+        <a href="Event.html" class="text-sm text-purple-400 hover:underline">See Events</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="text-center text-gray-200 mt-10 text-xl leading-relaxed">
+  🎉 Discover our moments! <br>
+  Click on the <span class="font-semibold text-blue-400">Photos</span>, 
+  <span class="font-semibold text-green-400">Videos</span>, and 
+  <span class="font-semibold text-purple-400">Event Highlights</span> icons below to explore more.
+</p>
+
+   
+    
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-black bg-opacity-90">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-purple-400">Success Stories</h2>
+                <p class="text-xl text-gray-300">
+                    Hear from students and professionals who have transformed their careers
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <img
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0c9cb7d9-2c9e-4921-9edb-a8ff5c8e4853.png"
+                            alt="Recent university graduate smiling with professional appearance"
+                            class="w-16 h-16 rounded-full mr-4"
+                        />
+                        <div>
+                            <h4 class="font-semibold text-purple-300">Sarah Johnson</h4>
+                            <p class="text-purple-400">Business Graduate</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 italic">
+                        "The communication skills I learned completely transformed my job interviews. Landed my dream job thanks to this training!"
+                    </p>
+                </div>
+
+                <div class="bg-gray-900 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <img
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b01856f3-73aa-4dd7-873b-3dbd7c30d5c1.png"
+                            alt="Corporate professional in business attire with confident expression"
+                            class="w-16 h-16 rounded-full mr-4"
+                        />
+                        <div>
+                            <h4 class="font-semibold text-purple-300">Michael Chen</h4>
+                            <p class="text-purple-400">Senior Manager</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 italic">
+                        "The leadership program helped me become a more effective manager. My team's performance has improved dramatically."
+                    </p>
+                </div>
+
+                <div class="bg-gray-900 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <img
+                            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d88f3aa8-6359-4e23-b5f6-2a1277691c26.png"
+                            alt="Young professional with bright smile and professional demeanor"
+                            class="w-16 h-16 rounded-full mr-4"
+                        />
+                        <div>
+                            <h4 class="font-semibold text-purple-300">Emily Rodriguez</h4>
+                            <p class="text-purple-400">Recent Graduate</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 italic">
+                        "The emotional intelligence workshop changed how I approach workplace relationships. Incredibly valuable for any career path."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Contact Section -->
+<section id="contact" class="py-20 gradient-bg text-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Let's Connect</h2>
+            <p class="text-xl text-blue-100">Ready to enhance your professional skills? Reach out to discuss your needs</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- Left Side (Form) -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-6">Get In Touch</h3>
+                <form class="space-y-6">
+                    <input type="text" placeholder="Your Name" class="w-full px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-100 focus:outline-none focus:ring-2 focus:ring-white">
+                    <input type="email" placeholder="Your Email" class="w-full px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-100 focus:outline-none focus:ring-2 focus:ring-white">
+                    <textarea placeholder="Your Message" rows="5" class="w-full px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-100 focus:outline-none focus:ring-2 focus:ring-white"></textarea>
+                    <button type="submit" class="w-full bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Right Side (Your Contact Info) -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                <div class="space-y-6">
+                    
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 icon-3d">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Name</p>
+                            <p class="text-blue-100">SHIVAM KUMAR</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 icon-3d">
+                            <i class="fab fa-whatsapp text-green-400"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">WhatsApp Only</p>
+                            <p class="text-blue-100">8796528626</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 icon-3d">
+                            <i class="fab fa-linkedin-in text-blue-400"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">LinkedIn</p>
+                            <p class="text-blue-100">
+                                <a href="https://linkedin.com/in/shivam-kumar-1a677b248" target="_blank" class="hover:underline">
+                                    linkedin.com/in/shivam-kumar-1a677b248
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 icon-3d">
+                            <i class="fas fa-envelope text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Email</p>
+                            <p class="text-blue-100">Shivamkumar444@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <h4 class="text-xl font-semibold mb-4">Follow Me</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://linkedin.com/in/shivam-kumar-1a677b248" target="_blank" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors icon-3d">
+                            <i class="fab fa-linkedin-in text-white text-xl"></i>
+                        </a>
+                        <a href="https://wa.me/918796528626" target="_blank" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors icon-3d">
+                            <i class="fab fa-whatsapp text-white text-xl"></i>
+                        </a>
+                        <a href="mailto:Shivamkumar444@gmail.com" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors icon-3d">
+                            <i class="fas fa-envelope text-white text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2024 Mr. Shivam Kumar. All rights reserved. Professional Soft Skills Development</p>
+            <p class="mt-2 text-gray-400">Transforming careers through essential professional skills</p>
+              <p> © CODE WITH SHANI </p>
+        </div>
+    </footer>
+
+    <script>
+        // Typing effect for hero section
+        const phrases = ['Leaders', 'Professionals', 'Students', 'Teams'];
+        let currentPhrase = 0;
+        let currentLetter = 0;
+        const typingElement = document.querySelector('.typing-effect');
+        
+        function type() {
+            if (currentLetter < phrases[currentPhrase].length) {
+                typingElement.textContent = phrases[currentPhrase].substring(0, currentLetter + 1);
+                currentLetter++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+        
+        function erase() {
+            if (currentLetter > 0) {
+                typingElement.textContent = phrases[currentPhrase].substring(0, currentLetter - 1);
+                currentLetter--;
+                setTimeout(erase, 50);
+            } else {
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                setTimeout(type, 500);
+            }
+        }
+        
+        // Start typing effect
+        setTimeout(type, 1000);
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Modules</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: #ecf0f1;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            background: #d6dbdf;
+        }
+        
+        .filter-btn.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .course-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .mode-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .online {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .offline {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .card-content p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f1f1f1;
+            padding: 15px 20px;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .btn {
+            padding: 8px 18px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Professional Training Modules</h1>
+        <p class="subtitle">Browse our comprehensive selection of courses designed to enhance your skills and advance your career</p>
+    </header>
+    
+    <div class="container">
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Courses</button>
+            <button class="filter-btn" data-filter="online">Online</button>
+            <button class="filter-btn" data-filter="offline">Offline</button>
+        </div>
+        
+        <div class="courses-grid">
+            <!-- Soft Skills -->
+            <div class="course-card" data-mode="online">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Soft Skills">
+                    <span class="mode-badge online">Online</span>
+                </div>
+                <div class="card-content">
+                    <h3>Soft Skills</h3>
+                    <p>Enhance your communication, teamwork, leadership, and personality development skills for professional success.</p>
+                </div>
+               
+            </div>
+            
+            <!-- Corporate Training -->
+            <div class="course-card" data-mode="offline">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Corporate Training">
+                    <span class="mode-badge offline">Offline</span>
+                </div>
+                <div class="card-content">
+                    <h3>Corporate Training</h3>
+                    <p>Master interview skills and workplace etiquette to excel in corporate environments and advance your career.</p>
+                </div>
+                
+            </div>
+            
+            <!-- Student Programs -->
+            <div class="course-card" data-mode="online">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Student Programs">
+                    <span class="mode-badge online">Online</span>
+                </div>
+                <div class="card-content">
+                    <h3>Student Programs</h3>
+                    <p>Learn resume writing techniques and group discussion preparation to stand out in competitive academic environments.</p>
+                </div>
+              
+            </div>
+            
+            <!-- Leadership Training -->
+            <div class="course-card" data-mode="offline">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Leadership Training">
+                    <span class="mode-badge offline">Offline</span>
+                </div>
+                <div class="card-content">
+                    <h3>Leadership Training</h3>
+                    <p>Develop essential leadership qualities and strategies to effectively lead teams and drive organizational success.</p>
+                </div>
+               
+            </div>
+            
+            <!-- Sales Training -->
+            <div class="course-card" data-mode="online">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sales Training">
+                    <span class="mode-badge online">Online</span>
+                </div>
+                <div class="card-content">
+                    <h3>Sales Training</h3>
+                    <p>Master sales techniques, negotiation skills, and customer relationship management to boost your sales performance.</p>
+                </div>
+               
+            </div>
+            
+            <!-- Academic Sessions -->
+            <div class="course-card" data-mode="offline">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Academic Sessions">
+                    <span class="mode-badge offline">Offline</span>
+                </div>
+                <div class="card-content">
+                    <h3>Academic Sessions</h3>
+                    <p>Specialized sessions designed to enhance academic performance, research skills, and subject knowledge.</p>
+                </div>
+              
+            </div>
+            
+            <!-- Life Coaching -->
+            <div class="course-card" data-mode="online">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Life Coaching">
+                    <span class="mode-badge online">Online</span>
+                </div>
+                <div class="card-content">
+                    <h3>Life Coaching</h3>
+                    <p>Transform your personal and professional life with guidance on goal setting, motivation, and personal development.</p>
+                </div>
+              
+            </div>
+            
+            <!-- Career Counselling -->
+            <div class="course-card" data-mode="online">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Career Counselling">
+                    <span class="mode-badge online">Online</span>
+                </div>
+                <div class="card-content">
+                    <h3>Career Counselling</h3>
+                    <p>Get personalized guidance on career choices, career transitions, and professional development planning.</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const courseCards = document.querySelectorAll('.course-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    courseCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            if (card.getAttribute('data-mode') === filter) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Add hover effect to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Photos Gallery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gallery-item {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .image-container {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8fafc;
+    }
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.05);
+    }
+    
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      transform: translateY(-50%);
+    }
+    .lightbox-nav button {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-caption {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 text-white p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">📸 Event Photos Gallery</h1>
+      <div class="text-sm">
+        <span id="image-count" class="bg-indigo-800 px-2 py-1 rounded-full">67 photos</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Gallery Section -->
+  <section class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold text-indigo-600 mb-2 text-center">Our Memories</h2>
+    <p class="text-gray-600 text-center mb-8">Relive the special moments from our event</p>
+    
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="gallery-grid">
+      <!-- Images will be inserted here by JavaScript -->
+    </div>
+    
+    <!-- Loading More Indicator -->
+    <div class="text-center mt-12" id="load-more-container">
+      <button id="load-more" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Load More Photos</button>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" id="lightbox-close">×</div>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-img" id="lightbox-img">
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+    <div class="lightbox-nav">
+      <button id="lightbox-prev">❮</button>
+      <button id="lightbox-next">❯</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6 mt-12">
+    <div class="container mx-auto text-center">
+      <p>© 2023 Event Photos Gallery. All rights reserved.</p>
+      <p class="text-gray-400 text-sm mt-2">Designed with ❤️ for memorable moments</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const galleryGrid = document.getElementById('gallery-grid');
+      const loadMoreBtn = document.getElementById('load-more');
+      
+      // Lightbox elements
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+      
+      let loadedCount = 0;
+      const imagesPerLoad = 16;
+      let allImages = [];
+      let currentImageIndex = 0;
+      
+      // Generate image data
+      const generateImageData = () => {
+        const imageData = [];
+        
+        for (let i = 1; i <= 48; i++) {
+          // Alternate between JPEG and JPG extensions
+          const ext = i === 1 ? 'jpeg' : 'jpg';
+          
+          imageData.push({
+            id: i,
+            filename: `Training pics/1 (${i}).${ext}`,
+            title: `Event Photo ${i}`
+          });
+        }
+        return imageData;
+      };
+      
+      allImages = generateImageData();
+      
+      // Function to load images
+      const loadImages = (count = imagesPerLoad) => {
+        // Show only the number of images we haven't loaded yet
+        const imagesToShow = allImages.slice(loadedCount, loadedCount + count);
+        
+        if (imagesToShow.length === 0) {
+          loadMoreBtn.style.display = 'none';
+          return;
+        }
+        
+        let htmlContent = '';
+        imagesToShow.forEach((img, index) => {
+          htmlContent += `
+            <div class="gallery-item rounded-xl shadow-md bg-white overflow-hidden" data-index="${loadedCount + index}">
+              <div class="image-container">
+                <img src="${img.filename}" alt="${img.title}" class="gallery-img" loading="lazy">
+              </div>
+              <div class="p-3">
+                <p class="text-sm text-gray-600">${img.title}</p>
+              </div>
+            </div>
+          `;
+        });
+        
+        galleryGrid.innerHTML += htmlContent;
+        loadedCount += imagesToShow.length;
+        
+        // Update image count
+        document.getElementById('image-count').textContent = `${loadedCount} of ${allImages.length} photos`;
+        
+        // Hide load more button if we've loaded all images
+        if (loadedCount >= allImages.length) {
+          loadMoreBtn.style.display = 'none';
+        } else {
+          loadMoreBtn.style.display = 'block';
+        }
+        
+        // Add click event to gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const index = parseInt(item.getAttribute('data-index'));
+            openLightbox(index);
+          });
+        });
+      };
+      
+      // Lightbox functions
+      function openLightbox(index) {
+        currentImageIndex = index;
+        lightboxImg.src = allImages[index].filename;
+        lightboxCaption.textContent = allImages[index].title;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+      
+      function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Enable scrolling
+      }
+      
+      function showNextImage() {
+        currentImageIndex = (currentImageIndex + 1) % allImages.length;
+        lightboxImg.src = allImages[currentImageIndex].filename;
+        lightboxCaption.textContent = allImages[currentImageIndex].title;
+      }
+      
+      function showPrevImage() {
+        currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+        lightboxImg.src = allImages[currentImageIndex].filename;
+        lightboxCaption.textContent = allImages[currentImageIndex].title;
+      }
+      
+      // Event listeners for lightbox
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxNext.addEventListener('click', showNextImage);
+      lightboxPrev.addEventListener('click', showPrevImage);
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') showNextImage();
+          if (e.key === 'ArrowLeft') showPrevImage();
+        }
+      });
+      
+      // Close lightbox when clicking on the background
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      
+      // Load more button event
+      loadMoreBtn.addEventListener('click', () => {
+        loadImages();
+      });
+      
+      // Initial load
+      loadImages();
+    });
+  </script>
+</body>
+</html>
